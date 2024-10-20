@@ -270,34 +270,6 @@ with body :
                 col4.image(prediction)
 
 
-if __name__ == "__main__":
-    license_plate_source = list(Path("./data/plates/").iterdir())
-    detections = []
-    for img in license_plate_source:
-        image = np.array(Image.open(img))
-        name = img.stem.replace('_', ' ')
-
-        results = model_prediction(image)
-        
-        if len(results) == 4 :
-            prediction, texts, license_plate_crop = results[0], results[1], results[2]
-
-            texts = [i for i in texts if i is not None]
-            plate = results[3]
-
-            detections.append((name, plate))
-
-
-    correct = 0
-    total = len(detections)
-    for lpn in detections:
-        print(lpn)
-        if lpn[0] == lpn[1]:
-            correct += 1
-
-    accuracy = correct/total
-    print(f"Accuracy: {accuracy}")
-
 
 
  
